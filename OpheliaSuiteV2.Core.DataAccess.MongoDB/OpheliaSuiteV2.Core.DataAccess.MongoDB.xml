@@ -1,0 +1,1447 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpheliaSuiteV2.Core.DataAccess.MongoDB</name>
+    </assembly>
+    <members>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.AppService">
+            <summary>
+            Clase base de los servicios de aplicación
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.AppService.Context">
+            <summary>
+            Contexto de datos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.AppService.Logger">
+            <summary>
+            Obtiene el registrador de eventos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.AppService.HttpAppContext">
+            <summary>
+            Contexto Http
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AppService.#ctor(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext,OpheliaSuiteV2.Core.SSB.Lib.Loggers.ILogger)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="context">Contexto de datos</param>
+            <param name="logger">Regitrador de eventos</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AppService.HandleException``1(System.Exception)">
+            <summary>
+            Da manejo a un excepción
+            </summary>
+            <param name="ex">Excepción a manejar</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditMessage">
+            <summary>
+            Encapsula los datos de un mensaje de auditoria
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger._auditContext">
+            <summary>
+            Contexto del módulo SSB
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger._repository">
+            <summary>
+            Repositorio de mensajes de auditoria
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger.#ctor(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext)">
+            <summary>
+            Inicializa una instancia de la clase
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger.SaveMessage(OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditMessage)">
+            <summary>
+            Guarda el mensaje en Mongo
+            </summary>
+            <param name="auditMessage">Información del mensaje</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger.WriteInfoMessage(System.String)">
+            <summary>
+            Escribe un mensaje tipo Información en el Registro de Auditoria
+            </summary>
+            <param name="message">Mensaje</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger.WriteErrorMessage(System.String)">
+            <summary>
+            Escribe un mensjae tipo Error en el registro de Auditora
+            </summary>
+            <param name="message">Mensaje</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger.WriteDebugMessage(System.String)">
+            <summary>
+            Escribe un mensaje tipo Debug en el Registro de Auditoria
+            </summary>
+            <param name="message">Mensaje</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger.WriteWarningMessage(System.String)">
+            <summary>
+            Escribe un mensaje tipo Alerta en el Registro de Auditoria
+            </summary>
+            <param name="message">Mensaje</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.AuditLogger.WriteException(System.Exception,System.String)">
+            <summary>
+            Escribe un mensaje tipo Excepción en el Registro de Auditoria
+            </summary>
+            <param name="message">Mensaje</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1">
+            <summary>
+            Implementa un repositorio
+            a una colección de archivos en una base de datos MongoDb
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1._entities">
+            <summary>
+            Instancia a la colección de entidades
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1._metadataEntities">
+            <summary>
+            Instancia a la colección de metadata de las entidades
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1._bucket">
+            <summary>
+            Instancia al repositorio de archivos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.Context">
+            <summary>
+            Obtiene la instancia del contexto de datos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.BucketName">
+            <summary>
+            Obtiene el nombre del bucket de archivos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.IndexOption">
+            <summary>
+            Obtiene las opciones de administración de indices
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.IndexOptionInternal">
+            <summary>
+            Obtiene las opciones de administración de indices internos
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.#ctor(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext,System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="context">Contexto al que pertenece el repositorio</param>
+            <param name="bucketName">Nombre del bucket de archivos</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.Initialize(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext,System.String)">
+            <summary>
+            Inicializa el repositorio con un contexto
+            </summary>
+            <param name="context">Contexto con el que inicializará el repositorio</param>
+            <param name="bucketName">Nombre del bucket de archivos</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.CreateDefaultIndexes">
+            <summary>
+            Crea los indices por defecto que tendrá la colección
+            de información de los archivos
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.CreateUploadOptions">
+            <summary>
+            Crea las opciones por defecto usadas para cargar un archivo
+            </summary>
+            <returns>Objeto de opciones</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.GetTotalFileSize">
+            <summary>
+            Obtiene tamaño total de los archivos en kb's
+            </summary>
+            <returns>Tamaño total</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.FindOverFileInfo(System.Linq.Expressions.Expression{System.Func{OpheliaSuiteV2.Core.DataAccess.MongoDb.FileInfo{`0},System.Boolean}})">
+            <summary>
+            Lista los archivos que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.FindOverFileInfoByFilter(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{OpheliaSuiteV2.Core.DataAccess.MongoDb.FileInfo{`0}})">
+            <summary>
+            Lista las entidades que cumplan con el filtro
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.FindOverMetadata(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Lista las entidades de metadata que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.FindOverMetadataByFilter(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{`0})">
+            <summary>
+            Lista las entidades de metadata que cumplan con el filtro
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.UploadFromBytes(System.String,System.Byte[],`0)">
+            <summary>
+            Carga el archivo de un arreglo de bytes
+            </summary>
+            <param name="fileName">Nombre del archivo</param>
+            <param name="content">Arreglo de bytes que contiene el archivo</param>
+            <param name="metadata">Entidad de metadatos</param>
+            <returns>Id de carga del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.UploadFromStream(System.String,System.IO.Stream,`0)">
+            <summary>
+            Carga el archivo de un arreglo de bytes
+            </summary>
+            <param name="fileName">Nombre del archivo</param>
+            <param name="content">Arreglo de bytes que contiene el archivo</param>
+            <param name="metadata">Entidad de metadatos</param>
+            <returns>Id de carga del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.DownloadAsBytes(System.String)">
+            <summary>
+            Descarga el archivo a un arreglo de bytes
+            </summary>
+            <param name="id">Id de la entidad metadata del archivo a descargar</param>
+            <returns>Arreglo de bytes del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.DownloadToStream(System.String,System.IO.Stream)">
+            <summary>
+            Descarga el archivo a una secuencia de bytes
+            </summary>
+            <param name="id">Id de la entidad metadata del archivo a descargar</param>
+            <param name="target">Secuencia de bytes destino</param>
+            <returns>Secuencia de bytes del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.BucketRepository`1.Delete(System.String)">
+            <summary>
+            Elimina un archivo por su id
+            </summary>
+            <param name="id">Id de la entidad metadata del archivo a descargar</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbClient">
+            <summary>
+            Implementación de un cliente MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbClient.Client">
+            <summary>
+            Obtiene el cliente de conexión a MongoDb
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbClient.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="connectionstring">Cadena de conexión al servidor MongoDb</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbClient.#cctor">
+            <summary>
+            Aqui se inicializa la configuración del driver
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbClient.Dispose">
+            <summary>
+            Destruye la instancia
+            </summary>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext">
+            <summary>
+            Implementación de un contexto de colecciones (Base de datos)
+            MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.Database">
+            <summary>
+            Obtiene la base de datos del contexto
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.Session">
+            <summary>
+            Obtiene la sesión actual
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.InTransaction">
+            <summary>
+            Valor que indica si el contexto se encuentra en una transacción
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.#ctor(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbClient,System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="client">Instancia del cliente de conexión a MongoDb</param>
+            <param name="database">Nombre de la base de datos</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.BeginTransaction">
+            <summary>
+            Inicia una nueva transacción
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.CommitChanges">
+            <summary>
+            Confirma los cambios realizados
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.RollbackChanges">
+            <summary>
+            Retrocede o descarta los cambios realizados
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.GetRepository``1">
+            <summary>
+            Obtiene un repositorio de tipo TRepository
+            </summary>
+            <typeparam name="TRepository">Tipo del repositorio</typeparam>
+            <returns>Repositorio</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbContext.GetDomainService``1">
+            <summary>
+            Obtiene un servicio de dominio de tipo TRepository
+            </summary>
+            <typeparam name="TDomainService">Tipo del servicio</typeparam>
+            <returns>Servicio</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbSettings">
+            <summary>
+            Encapsula las propiedades de configuración de una conexión a MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbSettings.ConnectionString">
+            <summary>
+            Obtiene o asigna la cadena de conexión
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.DbSettings.Database">
+            <summary>
+            Obtiene o asigna el nombre de la base de datos
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DomainService.SetContext(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext)">
+            <summary>
+            Asigna el contexto de datos a todos los repositorios del servicio
+            </summary>
+            <param name="context">Contexto de datos</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.DomainService.Dispose">
+            <summary>
+            Destruye la instancia
+            </summary>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityBase">
+            <summary>
+            Encapsula las características básicas de una entidad MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityBase.Id">
+            <summary>
+            Obtiene o asigna el Id de la entidad
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityBase.ChangeTracker">
+            <summary>
+            Obtiene o asigna el estado del rastreador de cambios de la entidad
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityBase.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityBase.EnsureState">
+            <summary>
+            Asegura que el estado de la entidad sea
+            coherente con el valor de su Id
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityBase.NewId">
+            <summary>
+            Crea un nuevo id para una entidad
+            </summary>
+            <returns>Nuevo id</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.ProjectionResult">
+            <summary>
+            Encapsula el resultado de una proyección de entidad
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.ProjectionResult.Count">
+            <summary>
+            Cantidad total de registros
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.ProjectionResult.PageSize">
+            <summary>
+            Tamaño de página
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.ProjectionResult.Page">
+            <summary>
+            Página actual
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.ProjectionResult.Result">
+            <summary>
+            Resultado de la proyección
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.FieldNames.Fields">
+            <summary>
+            Obtiene el arreglo de nombres de propiedades
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.FieldNames._fieldNamesLookup">
+            <summary>
+            Diccionario de los indices de las propiedades
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.FieldNames.FieldCount">
+            <summary>
+            Obtiene la cantidad de propiedades que hay
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FieldNames.#ctor(System.String[])">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="fieldNames">Arreglo de nombres de propiedades</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FieldNames.IndexOfName(System.String)">
+            <summary>
+            Obtiene el indice de un nombre de propiedad
+            </summary>
+            <param name="name">Nombre de la propiedad</param>
+            <returns>Indice en el que se encuentra</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FieldNames.AddField(System.String)">
+            <summary>
+            Agrega un nuevo nombre de propiedad al arreglo
+            </summary>
+            <param name="name">Nombre de la nueva propiedad</param>
+            <returns>El indice que ocupa el nuevo nombre</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FieldNames.FieldExists(System.String)">
+            <summary>
+            Obtiene un valor que indica si el campo existe
+            </summary>
+            <param name="name">Nombre del campo</param>
+            <returns>Valor que indica si el campo existe</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityProjectionAppService">
+            <summary>
+            Clase base de los servicios de aplicación que
+            provee un método de proyección de entidades paginadas
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityProjectionAppService.#ctor(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext,OpheliaSuiteV2.Core.SSB.Lib.Loggers.ILogger)">
+            <summary>
+            Inicialia una nueva instancia de la clase
+            </summary>
+            <param name="context">Contexto de datos</param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.EntityProjectionAppService.GetProjection``1(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Obtiene una proyección de resultados de una entidad
+            de forma páginada
+            </summary>
+            <returns>Resultado de la proyección</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.FileMetadata">
+            <summary>
+            Clase base que representa una entidad metadata
+            para un archivo cargado en una base de datos MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.FileMetadata.Id">
+            <summary>
+            Obtiene o asigna el Id de la entidad
+            </summary>  
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.FileMetadata.FileId">
+            <summary>
+            Obtiene o asigna el Id del archivo
+            </summary>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.FileInfo`1">
+            <summary>
+            Encapsula los datos de un archivo en el sistema de archivos de MongoDb
+            </summary>
+            <typeparam name="TEntity">Tipo de la entidad de metadata</typeparam>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.FileNotExistsException">
+            <summary>
+            Encapsula los datos de la excepción que ocurre
+            cuando un archivo no existe en la colección
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.FileNotExistsException.FileId">
+            <summary>
+            Obtiene el Id del archivo que no existe
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FileNotExistsException.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="fileId">Id del archivo</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1">
+            <summary>
+            Encapsula los filtros a usar para una consulta
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.InternalFilter">
+            <summary>
+            Filtros usados
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.InternalSort">
+            <summary>
+            Tipo de ordenamiento
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición de igualación al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndNotEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición negada de igualación al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndGt``1(System.String,``0)">
+            <summary>
+            Agrega un condición MAYOR QUE al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndLt``1(System.String,``0)">
+            <summary>
+            Agrega un condición MENOR QUE al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndGtEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición MAYOR OR IGUAL QUE al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndLtEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición MENOR OR IGUAL QUE al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndText(System.String)">
+            <summary>
+            Agrega un condición TEXT al filtro unida por un operador And
+            </summary>
+            <param name="text">Texto a buscar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndIn``1(System.String,``0[])">
+            <summary>
+            Agrega un condición IN al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="values">Valores del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.AndNotIn``1(System.String,``0[])">
+            <summary>
+            Agrega un condición NOT IN al filtro unida por un operador And
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="values">Valores del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición de igualación al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrText(System.String)">
+            <summary>
+            Agrega un condición TEXT al filtro unida por un operador And
+            </summary>
+            <param name="text">Texto a buscar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrNotEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición negada de igualación al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrGt``1(System.String,``0)">
+            <summary>
+            Agrega un condición MAYOR QUE al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrLt``1(System.String,``0)">
+            <summary>
+            Agrega un condición MENOR QUE al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrGtEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición MAYOR OR IGUAL QUE al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrLtEq``1(System.String,``0)">
+            <summary>
+            Agrega un condición MENOR OR IGUAL QUE al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="value">Valor del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrIn``1(System.String,``0[])">
+            <summary>
+            Agrega un condición IN al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="values">Valores del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.OrNotIn``1(System.String,``0[])">
+            <summary>
+            Agrega un condición NOT IN al filtro unida por un operador Or
+            </summary>
+            <typeparam name="TField">Tipo de dato del campo a igualar</typeparam>
+            <param name="fieldName">Nombre del campo a igualar</param>
+            <param name="values">Valores del campo a igualar</param>
+            <returns>Filtro resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.Create(OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression{`0})">
+            <summary>
+            Crea un filtro a partir de una expresión
+            </summary>
+            <param name="expression">Expresión a usar para crear el filtro</param>
+            <returns>Filtro creado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter`1.Create(MongoDB.Driver.FilterDefinition{`0})">
+            <summary>
+            Crea un filtro a partir de una definición
+            </summary>
+            <param name="definition">Definición a usar para crear el filtro</param>
+            <returns>Filtro creado</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1">
+            <summary>
+            Representa la construcción de filtros basados en una expresión
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.OrderByField">
+            <summary>
+            Campo y tipo de  ordenamiento del filtro
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.QueryParams">
+            <summary>
+            Expresión con el filtro para aplicar
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.SORTING_SEPARAT_OR">
+            <summary>
+            Corresponde al separador de ordenamiento
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.PARAMS_SEPARATOR_AND">
+            <summary>
+            Corresponde al separador de filtros de campos para
+            una operación logica and
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.FIELD_SEPARATOR">
+            <summary>
+            Separador campo valor de un filtro especifico
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.EXPRESSION_EVALUATE">
+            <summary>
+            Corresponde a la expresión que se va evaluar para la 
+            validación de filtrosm
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.STRING_EXPRESSION">
+            <summary>
+            Corresponde al tipo de filtro de cadena
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.NUMERIC_EXPRESSION">
+            <summary>
+            Corresponde a un filtro de tipo entero
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.#ctor(System.String,System.String)">
+            <summary>
+            Inicializa los valores por defecto de ordenamiento y el query
+            </summary>
+            <param name="orderByField"></param>
+            <param name="queryParams"></param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.BuildFilter">
+            <summary>
+            Construir objeto de tipo Filter basado en una expresión 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.BuildSort">
+            <summary>
+            Responsable de construir el ordenamiento
+            </summary>
+            <returns>Ordenamiento definido</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.FilterExpression`1.BuildQueryParams(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{`0}@,System.String,System.String,System.String,System.Char)">
+            <summary>
+            Encargado de construir el filtro de acuerdo al 
+            tipo de operador
+            </summary>
+            <param name="filter">Información del filtro a contruir</param>
+            <param name="field">Nombre del campo por el que se va filtrar</param>
+            <param name="operatorType">Tipo de operador a contruir</param>
+            <param name="value">Valor del campo  que se va filtrar</param>
+            <param name="connector">operador logico para la comparación</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IAppService">
+            <summary>
+            Define los atributos y métodos de un servicio de aplicación
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IAppService.Context">
+            <summary>
+            Contexto de datos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IAppService.Logger">
+            <summary>
+            Obtiene el registrador de eventos
+            </summary>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1">
+            <summary>
+            Define los atributos y comportamientos de un repositorio
+            a una colección de archivos en una base de datos MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.IndexOption">
+            <summary>
+            Obtiene las opciones de administración de indices
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.GetTotalFileSize">
+            <summary>
+            Obtiene tamaño total de los archivos en kb's
+            </summary>
+            <returns>Tamaño total</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.FindOverFileInfo(System.Linq.Expressions.Expression{System.Func{OpheliaSuiteV2.Core.DataAccess.MongoDb.FileInfo{`0},System.Boolean}})">
+            <summary>
+            Lista las entidades que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.FindOverFileInfoByFilter(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{OpheliaSuiteV2.Core.DataAccess.MongoDb.FileInfo{`0}})">
+            <summary>
+            Lista las entidades que cumplan con el filtro
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.FindOverMetadata(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Lista las entidades de metadata que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.FindOverMetadataByFilter(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{`0})">
+            <summary>
+            Lista las entidades de metadata que cumplan con el filtro
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.UploadFromBytes(System.String,System.Byte[],`0)">
+            <summary>
+            Carga el archivo de un arreglo de bytes
+            </summary>
+            <param name="fileName">Nombre del archivo</param>
+            <param name="content">Arreglo de bytes que contiene el archivo</param>
+            <param name="metadata">Entidad de metadatos</param>
+            <returns>Id de carga del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.UploadFromStream(System.String,System.IO.Stream,`0)">
+            <summary>
+            Carga el archivo de un arreglo de bytes
+            </summary>
+            <param name="fileName">Nombre del archivo</param>
+            <param name="content">Arreglo de bytes que contiene el archivo</param>
+            <param name="metadata">Entidad de metadatos</param>
+            <returns>Id de carga del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.DownloadAsBytes(System.String)">
+            <summary>
+            Descarga el archivo a un arreglo de bytes
+            </summary>
+            <param name="id">Id de la entidad metadata del archivo a descargar</param>
+            <returns>Arreglo de bytes del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.DownloadToStream(System.String,System.IO.Stream)">
+            <summary>
+            Descarga el archivo a una secuencia de bytes
+            </summary>
+            <param name="id">Id de la entidad metadata del archivo a descargar</param>
+            <param name="target">Secuencia de bytes destino</param>
+            <returns>Secuencia de bytes del archivo</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IBucketRepository`1.Delete(System.String)">
+            <summary>
+            Elimina un archivo por su id
+            </summary>
+            <param name="id">Id de la entidad metadata del archivo a descargar</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbClient">
+            <summary>
+            Define los atributos y comportamientos de un cliente MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbClient.Client">
+            <summary>
+            Obtiene el cliente MongoDb que contiene la conexión
+            </summary>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext">
+            <summary>
+            Define las características y comportamientos de un contexto
+            de colecciones (Bases de datos) MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.Database">
+            <summary>
+            Obtiene la instancia a la base de datos MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.Session">
+            <summary>
+            Obtiene la sesión actual
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.InTransaction">
+            <summary>
+            Valor que indica si el contexto se encuentra en una transacción
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.BeginTransaction">
+            <summary>
+            Inicia una nueva transacción
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.CommitChanges">
+            <summary>
+            Confirma los cambios realizados
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.RollbackChanges">
+            <summary>
+            Retrocede o descarta los cambios realizados
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.GetRepository``1">
+            <summary>
+            Obtiene un repositorio de tipo TRepository
+            </summary>
+            <typeparam name="TRepository">Tipo del repositorio</typeparam>
+            <param name="context">Contexto que extiende el método</param>
+            <returns>Repositorio</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext.GetDomainService``1">
+            <summary>
+            Obtiene un servicio de dominio de tipo TRepository
+            </summary>
+            <typeparam name="TDomainService">Tipo del servicio</typeparam>
+            <param name="context">Contexto que extiende el método</param>
+            <returns>Servicio</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDomainService">
+            <summary>
+            Define los atributos y métodos de un servicio de dominio
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IDomainService.SetContext(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext)">
+            <summary>
+            Asigna el contexto de datos a todos los repositorios del servicio
+            </summary>
+            <param name="context">Contexto de datos</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IncoherentEntityStateException">
+            <summary>
+            Encapsula los datos de la excepción que ocurre
+            cuando el estado de una entidad es incoherente
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IncoherentEntityStateException.EntityName">
+            <summary>
+            Obtiene el nombre de la entidad
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IncoherentEntityStateException.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="entityName">Nombre de la entidad incoherente</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.InvalidFilterExpressionException">
+            <summary>
+            Encapsula los datos de la excepción que ocurre
+            cuando la cadena de parámetros no cumple con la expresión
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.InvalidFilterExpressionException.QueryParams">
+            <summary>
+            Obtiene la cadena de parámetros
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.InvalidFilterExpressionException.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="queryParams">Cadena de parámetros</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1">
+            <summary>
+            Provee métodos para la administración de indices
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1._collection">
+            <summary>
+            Instancia a la colección
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.#ctor(MongoDB.Driver.IMongoCollection{`0})">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="collection">Instancia a la colección</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.GetIndexes">
+            <summary>
+            Obtiene todos los indices de la colección
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.CreateIndex(System.String,OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption{`0}.FieldIndex[],System.Boolean,System.Object)">
+            <summary>
+            Crea un indice en la colección
+            </summary>
+            <param name="name">Nombre del indice</param>
+            <param name="fields">Arreglo de campos que componen el indice</param>
+            <param name="isUnique">Valor que indica si el indice es único</param>
+            <param name="extendedProperties">Propiedades extentidas del indice si lo requiere</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.IndexType">
+            <summary>
+            Tipo de indice
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.IndexType.Text">
+            <summary>
+            Indice de texto
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.IndexType.Ascending">
+            <summary>
+            Cuaquier otro tipo de indice
+            que no requiera busqueda parcial de texto.
+            Se creará de forma ascendente
+            </summary>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.IndexType.Descending">
+            <summary>
+            Cuaquier otro tipo de indice
+            que no requiera busqueda parcial de texto.
+            Se creará de forma descendente
+            </summary>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.FieldIndex">
+            <summary>
+            Encapsula los datos de un campo que compone un indice
+            y la configuración de dicho campo en el indice
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.FieldIndex.Name">
+            <summary>
+            Obtiene el nombre del campo
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.FieldIndex.IndexType">
+            <summary>
+            Obtiene el tipo del campo en el indice
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption`1.FieldIndex.#ctor(System.String,OpheliaSuiteV2.Core.DataAccess.MongoDb.IndexOption{`0}.IndexType)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="name">Nombre del indice</param>
+            <param name="indexType">Tipo</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository">
+            <summary>
+            Define los atributos y comportamientos de un repositorio MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.Context">
+            <summary>
+            Obtiene la instancia del contexto de datos
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.Initialize(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext)">
+            <summary>
+            Inicializa el repositorio con un contexto
+            </summary>
+            <param name="context">Contexto con el que inicializará el repositorio</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.Add(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Agrega una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a agregar</param>
+            <returns>Entidad agregada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.Update(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Actualiza una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a actualizar</param>
+            <returns>Entidad actualizada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.Delete(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Elimina una entidad de la colección
+            </summary>
+            <param name="entity">Entidad a eliminar</param>
+            <returns>Entidad eliminada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.DeleteAll">
+            <summary>
+            Elimina todas las entidades en la colección
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.DropCollection">
+            <summary>
+            Elimina la colección completa de la base de datos
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.FindBy(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{MongoDB.Bson.BsonDocument})">
+            <summary>
+            Buscar por un filtro definido
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.ListAll">
+            <summary>
+            Lista todas las entidades de la colección
+            </summary>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository.List(System.Linq.Expressions.Expression{System.Func{MongoDB.Bson.BsonDocument,System.Boolean}})">
+            <summary>
+            Lista Las entidades que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1">
+            <summary>
+            Define los atributos y comportamientos de un repositorio MongoDb
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.IndexOption">
+            <summary>
+            Obtiene las opciones de administración de indices
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.Add(`0)">
+            <summary>
+            Agrega una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a agregar</param>
+            <returns>Entidad agregada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.Update(`0)">
+            <summary>
+            Actualiza una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a actualizar</param>
+            <returns>Entidad actualizada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.Delete(`0)">
+            <summary>
+            Elimina una entidad de la colección
+            </summary>
+            <param name="entity">Entidad a eliminar</param>
+            <returns>Entidad eliminada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.Exists(System.String)">
+            <summary>
+            Obtiene un valor que indica si una entidad existe
+            </summary>
+            <param name="id">Id de la entidad</param>
+            <returns>Valor que indica si la entidad existe</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.Find(System.String)">
+            <summary>
+            Buscar por el Id de la entidad
+            </summary>
+            <param name="id">Id de la entidad</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.FindBy(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{`0})">
+            <summary>
+            Buscar por un filtro definido
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.ListEntities">
+            <summary>
+            Lista todas las entidades de la colección
+            </summary>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.IRepository`1.List(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Lista Las entidades que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.PropertyIdNotFoundException">
+            <summary>
+            Encapsula los datos de la excepción que ocurre
+            cuando no se encuentra una propiedad Id dentro de
+            una entidad
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.PropertyIdNotFoundException.EntityName">
+            <summary>
+            Obtiene el nombre de la entidad que en donde
+            no se encontró la propiedad
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.PropertyIdNotFoundException.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="entityName">Nombre de la entidad</param>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository._collection">
+            <summary>
+            Instancia a la colección mongo
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.Context">
+            <summary>
+            Obtiene la instancia del contexto de datos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.CollectionName">
+            <summary>
+            Obtiene el nombre de la colección en la base de datos
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.Count">
+            <summary>
+            Obtiene la cantidad total de registros
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.IndexSize">
+            <summary>
+            Obtiene el tamaño total de los indices
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.Size">
+            <summary>
+            Obtiene el tamaño total de la colección
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.TotalSize">
+            <summary>
+            Obtiene el tamaño total de la colección con indices
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.#ctor(System.String,OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="collectionName">Nombre de la colección</param>
+            <param name="context">Contexto al que pertenece el repositorio</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.EnsurePropertyId(System.Object)">
+            <summary>
+            Asegura que la entidad tenga una propiedad Id
+            de tipo <see cref="T:MongoDB.Bson.ObjectId"/> o
+            de tipo <see cref="!:System.string"/> marcada con el atributo
+            <see cref="T:MongoDB.Bson.Serialization.Attributes.BsonRepresentationAttribute"/>
+            </summary>
+            <param name="entity">Entidad a verificar</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.EnsureContextInitialized">
+            <summary>
+            Asegura que el contexto se haya inicializado
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.Initialize(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext)">
+            <summary>
+            Inicializa el repositorio con un contexto
+            </summary>
+            <param name="context">Contexto con el que inicializará el repositorio</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.GetStats">
+            <summary>
+            Obtiene un documento con las estadísticas de la colección
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.Add(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Agrega una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a agregar</param>
+            <returns>Entidad agregada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.Update(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Actualiza una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a actualizar</param>
+            <returns>Entidad actualizada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.Delete(MongoDB.Bson.BsonDocument)">
+            <summary>
+            Elimina una entidad de la colección
+            </summary>
+            <param name="entity">Entidad a eliminar</param>
+            <returns>Entidad eliminada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.DeleteAll">
+            <summary>
+            Elimina todas las entidades en la colección
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.DropCollection">
+            <summary>
+            Elimina la colección completa de la base de datos
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.FindBy(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{MongoDB.Bson.BsonDocument})">
+            <summary>
+            Buscar por un filtro definido
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.ListAll">
+            <summary>
+            Lista todas las entidades de la colección
+            </summary>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository.List(System.Linq.Expressions.Expression{System.Func{MongoDB.Bson.BsonDocument,System.Boolean}})">
+            <summary>
+            Lista Las entidades que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="F:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1._collection">
+            <summary>
+            Instancia a la colección mongo
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.IndexOption">
+            <summary>
+            Obtiene las opciones de administración de indices
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="collectionName">Nombre de la colección</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.#ctor(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext,System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="context">Contexto al que pertenece el repositorio</param>
+            <param name="collectionName">Nombre de la colección</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.Initialize(OpheliaSuiteV2.Core.DataAccess.MongoDb.IDbContext)">
+            <summary>
+            Inicializa el repositorio con un contexto
+            </summary>
+            <param name="context">Contexto con el que inicializará el repositorio</param>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.Add(`0)">
+            <summary>
+            Agrega una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a agregar</param>
+            <returns>Entidad agregada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.Update(`0)">
+            <summary>
+            Actualiza una entidad en la colección
+            </summary>
+            <param name="entity">Entidad a actualizar</param>
+            <returns>Entidad actualizada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.Delete(`0)">
+            <summary>
+            Elimina una entidad de la colección
+            </summary>
+            <param name="entity">Entidad a eliminar</param>
+            <returns>Entidad eliminada</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.Exists(System.String)">
+            <summary>
+            Obtiene un valor que indica si una entidad existe
+            </summary>
+            <param name="id">Id de la entidad</param>
+            <returns>Valor que indica si la entidad existe</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.Find(System.String)">
+            <summary>
+            Buscar por el Id de la entidad
+            </summary>
+            <param name="id">Id de la entidad</param>
+            <returns>Entidad resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.FindBy(OpheliaSuiteV2.Core.DataAccess.MongoDb.Filter{`0})">
+            <summary>
+            Buscar por un filtro definido
+            </summary>
+            <param name="filter">Filtro de busqueda</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.ListEntities">
+            <summary>
+            Lista todas las entidades de la colección
+            </summary>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.Repository`1.List(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Lista Las entidades que cumplan con el criterio e búsqueda
+            </summary>
+            <param name="predicate">Predicado usado para la consulta</param>
+            <returns>Enumeración de entidades resultado</returns>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.RepositoryContextNotInitializedException">
+            <summary>
+            Encapsula los datos de la excepción que ocurre
+            cuando un repositorio no ha inicializado su contexto
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.RepositoryContextNotInitializedException.RepositoryName">
+            <summary>
+            Obtiene el nombre del repositorio que no ha 
+            inicializado el contexto
+            </summary>
+        </member>
+        <member name="M:OpheliaSuiteV2.Core.DataAccess.MongoDb.RepositoryContextNotInitializedException.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase
+            </summary>
+            <param name="repositoryName">Nombre del repositorio</param>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.SessionConfig">
+            <summary>
+            Encapsula datos de configuración que persisten
+            durante la sesión actual
+            </summary>
+        </member>
+        <member name="P:OpheliaSuiteV2.Core.DataAccess.MongoDb.SessionConfig.NamingStrategy">
+            <summary>
+            Nombre de la estrategia de nombrado
+            usada para serializar los nombres de las
+            propiedades en las entidades
+            </summary>
+        </member>
+        <member name="T:OpheliaSuiteV2.Core.DataAccess.MongoDb.NamingStrategyType">
+            <summary>
+            Tipo de estrategia de nombrado
+            </summary>
+        </member>
+    </members>
+</doc>

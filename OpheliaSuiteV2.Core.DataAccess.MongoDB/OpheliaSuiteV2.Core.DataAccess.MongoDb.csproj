@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>Ophelia Suite</Authors>
+    <Company>DigitalWare S.A</Company>
+    <Product>OpheliaSuiteV2.Core.DataAccess.MongoDb</Product>
+    <Description>Paquete de acceso a datos en colecciones MongoDb</Description>
+    <Copyright>DigitalWare S.A</Copyright>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageTags>MongoDb DataAccess OpheliaSuite</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>3.2.12.0</Version>
+    <PackageReleaseNotes>Agrega Garbage Collection para liberar recursos</PackageReleaseNotes>
+    <AssemblyVersion>3.2.12.0</AssemblyVersion>
+    <FileVersion>3.2.12.0</FileVersion>
+    <NeutralLanguage>es-CO</NeutralLanguage>
+    <PackageIcon>favicon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>http://www.digitalware.com.co/index.php/productos/ophelia-bpm</PackageProjectUrl>
+    <AssemblyName>OpheliaSuiteV2.Core.DataAccess.MongoDB</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Developments\DigitalWare\OpheliaSuiteV2.Core.DataAccess.MongoDB\OpheliaSuiteV2.Core.DataAccess.MongoDB\OpheliaSuiteV2.Core.DataAccess.MongoDB.xml</DocumentationFile>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.13.2" />
+    <PackageReference Include="MongoDB.Driver.GridFS" Version="2.13.2" />
+    <PackageReference Include="OpheliaSuiteV2.Core.SSB.Lib" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Nuget Packages\favicon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>
